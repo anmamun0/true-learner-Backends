@@ -38,7 +38,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:5501",  # Frontend URL
 # ]
 
-# CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = ["*"]
 #     "http://127.0.0.1:5501",
 # ]
  
