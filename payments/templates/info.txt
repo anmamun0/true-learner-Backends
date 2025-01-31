@@ -1,0 +1,30 @@
+Store ID: ancod6799f7f3afcfa
+Store Password (API/Secret Key): ancod6799f7f3afcfa@ssl
+
+------------------------------
+
+
+ 
+Congratulations
+ 
+Sandbox Store ID Created
+ 
+We highly appreciate if you first connect with the sandbox and then move to the live system. Please inform us if you need to change Registered Store URL for testbox.
+ 
+
+ 
+Store ID: ancod6799f7f3afcfa
+Store Password (API/Secret Key): ancod6799f7f3afcfa@ssl
+
+
+Merchant Panel URL: https://sandbox.sslcommerz.com/manage/ (Credential as you inputted in the time of registration)
+
+
+ 
+Store name: testancod798l
+Registered URL: http://127.0.0.1:8000/
+Session API to generate transaction: https://sandbox.sslcommerz.com/gwprocess/v3/api.php
+Validation API: https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php?wsdl
+Validation API (Web Service) name: https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php
+ 
+You may check our plugins available for multiple carts and libraries: https://github.com/sslcommerz

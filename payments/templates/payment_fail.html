@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- TailwindCSS CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome CDN -->
+</head>
+<body class="bg-gradient-to-r from-gray-100 via-gray-50 to-white font-poppins">
+    <div class=" h-screen ">  
+
+    <!-- Fullscreen Container -->
+    <div class="flex justify-center items-centerpx-4 p-10 text-xs">
+
+        <!-- Payment Failure Box -->
+        <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-2xl p-12 space-y-4 overflow-hidden transform transition-transform duration-300 ">
+
+            <!-- Retry Option -->
+            <div class="absolute top-4 right-4 text-center">
+                <a href="/retry-payment" class="inline-flex items-center justify-center text-red-600 px-6 py-3 rounded-full   transition-all duration-200 transform hover:scale-105 ">
+                    <i class="fas fa-sync-alt text-lg mr-2"></i> Retry Payment
+                </a>
+            </div>
+
+            <!-- Failure Icon -->
+            <div class="flex justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+
+            <!-- Heading -->
+            <h2 class="text-2xl font-semibold text-center text-gray-800">Payment Failed!</h2>
+
+            <!-- Failure Summary -->
+            <div class="text-center text-gray-700">
+                <p class="text-xs mb-4">Oops! Something went wrong with your payment. Please try again or contact support.</p>
+            </div>
+
+            <!-- Transaction Information -->
+            <div class="flex justify-between gap-6">
+                <!-- Error Details -->
+                <div class="flex-1 bg-gray-50 rounded-xl shadow-lg p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Error Details</h3>
+                    <p class="text-md text-gray-700">Error Code: <span class="font-semibold text-red-600">TRANSACTION_FAILED</span></p>
+                    <p class="text-md text-gray-700">Reason: <span class="font-semibold text-red-600">Insufficient Funds or Network Issue</span></p>
+                </div>
+
+                <!-- Transaction Summary -->
+                <div class="flex-1 bg-gray-50 rounded-xl shadow-lg p-6 space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Transaction Summary</h3>
+                    <p class="text-md text-gray-700">Transaction ID: <span class="font-semibold text-blue-600">None</span></p>
+                    <p class="text-md text-gray-700">Payment Date: <span class="font-semibold text-gray-700">{{ payment_date }}</span></p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center mt-8">
+                <p class="text-md text-gray-600 mb-6">If the issue persists, please contact our support team.</p>
+                <a href="mailto:support@example.com" class="inline-block bg-blue-500 text-white px-8 py-3 rounded-full shadow-md hover:bg-blue-600 transition-all duration-200 transform hover:scale-105">Contact Support</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
