@@ -11,4 +11,5 @@ environ
 pillow
 psycopg2-binary
 whitenoise 
-gunicorn 
+gunicorn  
+sslcommerz-lib
