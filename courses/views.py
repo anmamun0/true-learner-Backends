@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets ,status , response
-from .serializers import CourseSerializers, VideoSerializes ,CategorySerializer
+from .serializers import CourseSerializers, VideoSerializes ,CategorySerializer ,EnrollmentStudents
 # Create your views here.
 from .models import Course,Video, Category
 
@@ -102,3 +102,9 @@ class VideoView(viewsets.ModelViewSet):
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+
+class EnrollmentStudentsView(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = EnrollmentStudents

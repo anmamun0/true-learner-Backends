@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Course, Video ,Category
 
+from accounts.models import Student
+from django.contrib.auth.models import User
 
 class CategorySerializer(serializers.ModelSerializer):
     # Define course_count as a SerializerMethodField
@@ -32,3 +34,22 @@ class CourseSerializers(serializers.ModelSerializer):
     def get_students(self,obj):
         return obj.students.count()
 
+
+
+class EnrollUser(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username','first_name','last_name','email']  # Typo: 'fileds' should be 'fields'
+
+
+class EnrollStudent(serializers.ModelSerializer):
+    user = EnrollUser(read_only=True)
+    class Meta:
+        model = Student
+        fields = ['user','image','bio','phone','address','facebook','twitter','linkedin']
+
+class EnrollmentStudents(serializers.ModelSerializer):
+    students = EnrollStudent(read_only=True,many=True)
+    class Meta:
+        model = Course
+        fields = ['code','students']
