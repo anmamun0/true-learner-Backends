@@ -18,36 +18,68 @@ class CourseView(viewsets.ModelViewSet):
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filterset_class = CourseFilter
 
-    @action(detail=True,methods=['post'],url_path='create')
-    def course_create(self,request,pk=None):
+    @action(detail=False, methods=['post'], url_path='create')
+    def course_create(self, request):
         try:
-            user = User.objects.get(pk=pk)  
+            user = request.user  # Get user from request 
             if not user.groups.filter(name='Instructor').exists():
                 return response.Response({'error':"You'r not an Instructor"},status=status.HTTP_404_NOT_FOUND)
             
             # Extract data from the request
             title = request.data.get('title')
+            thumble = request.data.get('thumble')
+            category_ids = request.data.get('category', []) 
             description = request.data.get('description')  # Make sure the key matches
             price = request.data.get('price')
+            total_lecture = request.data.get('total_lecture','')
+            total_session = request.data.get('total_session','')
+            total_length = request.data.get('total_length','')
+            videos = request.data.get('videos',[])
             
             course = Course.objects.create(
                 instructor= user,
                 title=title,
+                thumble=thumble, 
                 description=description,
                 price=price,
+                total_lecture=total_lecture,
+                total_session=total_session,
+                total_length=total_length,
             )
+            if category_ids:
+                    course.category.set(Category.objects.filter(id__in=category_ids))
+            course.save()
+
+
+            if videos: 
+                for video in videos:
+                    v_title , v_url, v_duration = video.get('title'), video.get('url'), video.get('duration') 
+                    if all([v_title, v_url, v_duration is not None]):
+                        Video.objects.create(
+                            course=course,
+                            title=v_title,
+                            url=v_url,
+                            duration=v_duration,
+                        )
+
+
             serializer = CourseSerializers(course)
             return response.Response(serializer.data,status=status.HTTP_200_OK)
         except Exception as e:
             return response.Response({'error':str(e)},status=status.HTTP_501_NOT_IMPLEMENTED)
         
-    @action(detail=True,methods=['post'],url_path='update')
-    def course_create(self,request,pk=None):
+        
+    @action(detail=True,methods=['put'],url_path='update')
+    def update_create(self,request,pk=None):
         try:
             course = Course.objects.get(pk=pk) 
             course.title = request.data.get('title',course.title)
-            course.description = request.data.get('description',course.title)  # Make sure the key matches
-            course.price = request.data.get('price',course.title)
+            course.thumble = request.data.get('title',course.thumble)
+
+            course.description = request.data.get('description',course.description)  # Make sure the key matches
+            course.total_lecture = request.data.get('total_lecture',course.prtotal_lecturece)
+            course.total_session = request.data.get('total_session',course.total_session)
+            course.total_length = request.data.get('total_length',course.total_length) 
             course.save()
             
             serializer = CourseSerializers(course)

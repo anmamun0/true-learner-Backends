@@ -12,8 +12,8 @@ class Category(models.Model):
     
 
 class Course(models.Model):
-    code = models.AutoField(primary_key=True) 
-    instructor = models.ForeignKey(User,on_delete=models.CASCADE,related_name='courses') 
+    code = models.AutoField(primary_key=True)
+    instructor = models.ForeignKey(User,on_delete=models.CASCADE,related_name='courses')
     thumble = models.URLField(max_length=100,null=True,blank=True)
     category = models.ManyToManyField(Category,related_name='course')
     title  = models.CharField(max_length=50)
