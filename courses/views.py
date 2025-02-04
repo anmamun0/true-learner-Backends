@@ -28,7 +28,7 @@ class CourseView(viewsets.ModelViewSet):
             # Extract data from the request
             title = request.data.get('title')
             thumble = request.data.get('thumble',None)
-            category_ids = request.data.get('category', []) 
+            category_ids = list(map(int, request.data.getlist('category', [])))
             description = request.data.get('description')  # Make sure the key matches
             price = request.data.get('price')
             total_lecture = request.data.get('total_lecture','')
