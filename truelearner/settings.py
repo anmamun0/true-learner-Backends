@@ -39,7 +39,13 @@ CORS_ALLOW_CREDENTIALS = True
 # ]
 CSRF_TRUSTED_ORIGINS = ['https://truelearner-backends.onrender.com','https://*.127.0.0.1','http://127.0.0.1:5501',]
 
- 
+ # ✅ CSRF Settings
+CSRF_TRUSTED_ORIGINS = [
+    'https://truelearner-backends.onrender.com',
+    'https://truelearner.vercel.app/',  # Change this to your frontend domain
+    'http://127.0.0.1:5501',
+]
+
  
 # Enable session-based authentication
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'

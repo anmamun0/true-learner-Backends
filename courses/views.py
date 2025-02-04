@@ -20,15 +20,19 @@ class CourseView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'], url_path='create')
     def course_create(self, request):
+        
+        print('ye agaya')
+        print(request.user.username)
+
         try:
             user = request.user  # Get user from request 
             if not user.groups.filter(name='Instructor').exists():
+                print("no founbd")
                 return response.Response({'error':"You'r not an Instructor"},status=status.HTTP_404_NOT_FOUND)
-            
             # Extract data from the request
             title = request.data.get('title')
             thumble = request.data.get('thumble',None)
-            category_ids = list(map(int, request.data.getlist('category', [])))
+            category_ids = request.data.get('category', []) 
             description = request.data.get('description')  # Make sure the key matches
             price = request.data.get('price')
             total_lecture = request.data.get('total_lecture','')
