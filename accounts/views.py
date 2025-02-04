@@ -104,9 +104,7 @@ class LoginView(APIView):
 class LogoutView(APIView):
     def post(self, request): 
         token_key = request.data.get('token')  # Get the token from request body
-        user = TOKEN_USER(token_key)
-        print(user.username)
-     
+       
         if not token_key:
             return Response({"error": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
         try: 

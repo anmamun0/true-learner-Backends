@@ -39,16 +39,16 @@ CORS_ALLOW_CREDENTIALS = True
 # ]
 CSRF_TRUSTED_ORIGINS = ['https://truelearner-backends.onrender.com','https://*.127.0.0.1','http://127.0.0.1:5501',]
 
- # ✅ CSRF Settings
-CSRF_TRUSTED_ORIGINS = [
-    'https://truelearner-backends.onrender.com',
-    'https://truelearner.vercel.app/',  # Change this to your frontend domain
-    'http://127.0.0.1:5501',
-]
-CSRF_COOKIE_SECURE = True  # Must be True if using HTTPS
-CSRF_COOKIE_HTTPONLY = False  # Allow frontend JS to read CSRF token
-CSRF_COOKIE_SAMESITE = 'None'  # Required for cross-origin requests
-CSRF_COOKIE_NAME = 'csrftoken'
+#  # ✅ CSRF Settings
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://truelearner-backends.onrender.com',
+#     'https://truelearner.vercel.app/',  # Change this to your frontend domain
+#     'http://127.0.0.1:5501',
+# ]
+# CSRF_COOKIE_SECURE = True  # Must be True if using HTTPS
+# CSRF_COOKIE_HTTPONLY = False  # Allow frontend JS to read CSRF token
+# CSRF_COOKIE_SAMESITE = 'None'  # Required for cross-origin requests
+# CSRF_COOKIE_NAME = 'csrftoken'
  
 # Enable session-based authentication
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
