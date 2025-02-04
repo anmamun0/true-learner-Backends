@@ -20,6 +20,7 @@ from rest_framework import viewsets
 
 from rest_framework.decorators import action
 
+from .constraint import TOKEN_USER
 
 class RegistrationView(APIView):
     serializer_class = RegistraionSerializer
@@ -101,11 +102,18 @@ class LoginView(APIView):
     
 
 class LogoutView(APIView):
-    def get(self, request): 
-        print(request.user.username) 
-        try:   
-            token = Token.objects.get(user=User.objects.get(id=request.user.id))
-            token.delete() 
+    def post(self, request): 
+        token_key = request.data.get('token')  # Get the token from request body
+        user = TOKEN_USER(token_key)
+        print(user.username)
+     
+        if not token_key:
+            return Response({"error": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
+        try: 
+            token = Token.objects.get(key=token_key)
+           
+            token.delete()  # Delete the token
+            
             logout(request) 
             return Response({"message": "Successfully Logout and Token deleted!"}, status=status.HTTP_200_OK)
         except Token.DoesNotExist:

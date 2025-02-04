@@ -54,11 +54,12 @@ CSRF_COOKIE_NAME = 'csrftoken'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Configure cookie settings
-SESSION_COOKIE_NAME = 'sessionid'  # Default cookie name is 'sessionid'
-SESSION_COOKIE_HTTPONLY = True      # This prevents JavaScript from accessing the cookie directly
-SESSION_COOKIE_SAMESITE = 'Lax'    # or 'None' for cross-site requests (if using different domains/ports)
-SESSION_COOKIE_SECURE = False      # Set to True if using HTTPS in production
+SESSION_COOKIE_SAMESITE = 'None'  # Required for cross-origin session cookies
+SESSION_COOKIE_SECURE = True  # Must be True for HTTPS
+SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access (for security)
+SESSION_COOKIE_NAME = 'sessionid'
 
+   
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # For Gmail
