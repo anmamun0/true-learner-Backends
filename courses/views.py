@@ -11,6 +11,7 @@ from rest_framework.decorators import action
 from django.contrib.auth.models import User
 
 from django.core.exceptions import ObjectDoesNotExist
+from accounts.constraint import TOKEN_USER
 
 class CourseView(viewsets.ModelViewSet):
     queryset = Course.objects.all()
@@ -25,10 +26,12 @@ class CourseView(viewsets.ModelViewSet):
         print(request.user.username)
 
         try:
-            user = request.user  # Get user from request 
-            if not user.groups.filter(name='Instructor').exists():
-                print("no founbd")
+            token_key = request.data.get('token')
+            instructor = TOKEN_USER(token_key) 
+            if not instructor.groups.filter(name='Instructor').exists(): 
                 return response.Response({'error':"You'r not an Instructor"},status=status.HTTP_404_NOT_FOUND)
+
+            print(instructor.username)
             # Extract data from the request
             title = request.data.get('title')
             thumble = request.data.get('thumble',None)
@@ -41,7 +44,7 @@ class CourseView(viewsets.ModelViewSet):
             videos = request.data.get('videos',[])
             
             course = Course.objects.create(
-                instructor= user,
+                instructor= instructor,
                 title=title,
                 thumble=thumble, 
                 description=description,
