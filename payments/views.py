@@ -42,9 +42,9 @@ def payment(request,user_id,course_id):
         'total_amount': 100.26,
         'currency': "BDT",
         'tran_id': transaction_id,  # Unique transaction ID
-        'success_url': f"http://127.0.0.1:8000/payment/success/{user_id}/{course_id}",
-        'fail_url': "http://127.0.0.1:8000/payment/fail/",
-        'cancel_url': "http://127.0.0.1:8000/payment/cancel/",
+        'success_url': f"https://truelearner-backends.onrender.com/payment/success/{user_id}/{course_id}",
+        'fail_url': "https://truelearner-backends.onrender.com/payment/fail/",
+        'cancel_url': "https://truelearner-backends.onrender.com/payment/cancel/",
         'emi_option': 0,
         'cus_name': user.username,
         'cus_email': user.email,
