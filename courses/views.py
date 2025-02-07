@@ -125,7 +125,7 @@ class VideoView(viewsets.ModelViewSet):
             video.title = request.data.get('title',video.title)
             video.url = request.data.get('url',video.url)
             video.duration = request.data.get('duration',video.duration)
-            
+
             video.save()
             info = VideoSerializes(video)
             return response.Response(info.data,status=status.HTTP_200_OK)
@@ -135,7 +135,7 @@ class VideoView(viewsets.ModelViewSet):
     @action(detail=True,methods=['delete'],url_path='delete')
     def video_delete(self,request,pk=None):
         try:
-            video = Video.objects.get(pk=pk)
+            video = Video.objects.get(order=pk)
             video.delete()
             return response.Response({'message':"Successfully video deleted!"},status=status.HTTP_200_OK)
         except Exception as e:
