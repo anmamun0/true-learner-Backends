@@ -81,10 +81,11 @@ class CourseView(viewsets.ModelViewSet):
         try:
             course = Course.objects.get(pk=pk) 
             course.title = request.data.get('title',course.title)
-            course.thumble = request.data.get('title',course.thumble)
+            course.thumble = request.data.get('thumble',course.thumble)
+            course.price = request.data.get('price',course.price)
 
             course.description = request.data.get('description',course.description)  # Make sure the key matches
-            course.total_lecture = request.data.get('total_lecture',course.prtotal_lecturece)
+            course.total_lecture = request.data.get('total_lecture',course.total_lecture)
             course.total_session = request.data.get('total_session',course.total_session)
             course.total_length = request.data.get('total_length',course.total_length) 
             course.save()
@@ -105,10 +106,12 @@ class VideoView(viewsets.ModelViewSet):
             course = Course.objects.get(pk=pk)
             title = request.data.get('title')
             url = request.data.get('url') 
+            duration = request.data.get('duration')
             video = Video.objects.create(
                 course=course,
                 title=title,
                 url=url,
+                duration=duration
             )
             serializer = VideoSerializes(video)
             return response.Response(serializer.data,status=status.HTTP_201_CREATED)
@@ -121,13 +124,15 @@ class VideoView(viewsets.ModelViewSet):
             video = Video.objects.get(pk=pk)
             video.title = request.data.get('title',video.title)
             video.url = request.data.get('url',video.url)
+            video.duration = request.data.get('duration',video.duration)
+            
             video.save()
             info = VideoSerializes(video)
             return response.Response(info.data,status=status.HTTP_200_OK)
         except Exception as e:
             return response.Response({'error':str(e)},status=status.HTTP_400_BAD_REQUEST)
         
-    @action(detail=True,methods=['post'],url_path='delete')
+    @action(detail=True,methods=['delete'],url_path='delete')
     def video_delete(self,request,pk=None):
         try:
             video = Video.objects.get(pk=pk)
