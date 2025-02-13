@@ -213,3 +213,10 @@ def cancel_view(request):
 
 
 
+from .serializers import studentHistorySerializers
+from .models import studentHistory
+from rest_framework.viewsets import ModelViewSet
+
+class studentHistoryView(ModelViewSet):
+    queryset = studentHistory.objects.all()
+    serializer_class = studentHistorySerializers
