@@ -216,7 +216,13 @@ def cancel_view(request):
 from .serializers import studentHistorySerializers
 from .models import studentHistory
 from rest_framework.viewsets import ModelViewSet
+from django_filters import rest_framework
+from .filters import studentHistoryFilter
+
 
 class studentHistoryView(ModelViewSet):
     queryset = studentHistory.objects.all()
     serializer_class = studentHistorySerializers
+
+    filter_backends = (rest_framework.DjangoFilterBackend,)
+    filterset_class =studentHistoryFilter
