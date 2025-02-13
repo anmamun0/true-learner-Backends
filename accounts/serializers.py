@@ -78,7 +78,7 @@ from payments.models import studentHistory
 class studentHistroySerializers(serializers.ModelSerializer):
     class Meta:
         model = studentHistory
-        fields = ['payment','course','enroll_type','created_on']
+        fields = ['id','payment','course','enroll_type','created_on']
 
 class CourseDetails(serializers.ModelSerializer): 
     class Meta:
