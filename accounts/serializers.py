@@ -73,6 +73,12 @@ class InstructorSerialisers(serializers.ModelSerializer):
         fields = ['id','username','first_name','last_name','email','groups','last_login','instructor_profile','courses']
 
 from courses.models import Course
+from payments.models import studentHistory
+
+class studentHistroySerializers(serializers.ModelSerializer):
+    class Meta:
+        model = studentHistory
+        fields = ['payment','course','enroll_type','created_on']
 
 class CourseDetails(serializers.ModelSerializer): 
     class Meta:
@@ -87,6 +93,7 @@ class StudentSerialisersProfile(serializers.ModelSerializer):
 
 class StudentSerialisers(serializers.ModelSerializer):
     student_profile = StudentSerialisersProfile(read_only=True)  
+    student_history = studentHistroySerializers(read_only=True,many=True)
     class Meta:
         model = User
-        fields = ['id','username','first_name','last_name','email','groups','last_login','student_profile']
+        fields = ['id','username','first_name','last_name','email','groups','last_login','student_profile','student_history']

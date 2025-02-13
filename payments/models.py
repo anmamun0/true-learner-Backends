@@ -9,6 +9,9 @@ class studentHistory(models.Model):
     enroll_type = models.CharField(max_length=20) 
     created_on = models.DateTimeField(auto_now_add=True)    
 
+    class Meta:
+        ordering = ["-created_on"]
+
 class instructorHistory(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='instructor_history')
     course = models.ForeignKey(Course,on_delete=models.SET_NULL,null=True)
