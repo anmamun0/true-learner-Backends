@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from rest_framework.decorators import api_view
 from courses.models import Course
+from .models import studentHistory
 
 @csrf_exempt
 def payment(request,user_id,course_id):
@@ -20,8 +21,7 @@ def payment(request,user_id,course_id):
     if(course.price<=0):
         return success_view(request,user_id,course_id) 
 
-    print('abcd', user_id,'efgh',course_id)
-    
+     
     settings = {
         'store_id': 'ancod6799f7f3afcfa',
         'store_pass': 'ancod6799f7f3afcfa@ssl',
@@ -61,8 +61,7 @@ def payment(request,user_id,course_id):
     }
 
     response = sslcz.createSession(post_body)  # API response
-    print('asdf', user.username)
-
+ 
     if 'GatewayPageURL' in response:
         return JsonResponse({"url": response['GatewayPageURL']})  # Send URL as JSON
     else:
@@ -82,6 +81,13 @@ def success_view(request, user_id,course_id):
         instructor = course.instructor.instructor_profile
         instructor.total_students += 1
         instructor.save()
+
+        studentHistory.objects.create(
+            user=user,
+            course=course,
+            payment=course.price,
+            enroll_type = "Free" if course.price==0 else "Paid"
+        )
         
     except User.DoesNotExist:
         return HttpResponse("User not found.", status=404)
