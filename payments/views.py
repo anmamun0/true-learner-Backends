@@ -13,6 +13,8 @@ from rest_framework.decorators import api_view
 from courses.models import Course
 from .models import studentHistory
 
+from progressions.models import Progres
+
 @csrf_exempt
 def payment(request,user_id,course_id):
     if request.method != "POST":
@@ -78,6 +80,10 @@ def success_view(request, user_id,course_id):
         course.save()
 
         user.student_profile.courses.add(course)
+        Progres.objects.create(student=user.student_profile,course=course)
+        print('progres created')
+
+
         instructor = course.instructor.instructor_profile
         instructor.total_students += 1
         instructor.save()

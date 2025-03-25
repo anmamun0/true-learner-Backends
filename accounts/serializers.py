@@ -27,7 +27,6 @@ class UserLoginSerializers(serializers.Serializer):
     email = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True,required=True)
     role = serializers.CharField(write_only=True,required=True)
-
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')

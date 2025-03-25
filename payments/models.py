@@ -8,7 +8,6 @@ class studentHistory(models.Model):
     payment = models.CharField(max_length=12)
     enroll_type = models.CharField(max_length=20) 
     created_on = models.DateTimeField(auto_now_add=True)    
-
     class Meta:
         ordering = ["-created_on"]
 

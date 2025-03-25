@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'courses',
     'payments',
     'corsheaders',
+    'progressions',
     
 ] 
 
