@@ -5,7 +5,7 @@ from courses.models import Course
 # Create your models here.
 class Progres(models.Model):
     student = models.ForeignKey(Student,on_delete=models.CASCADE,related_name='student_progress')
-    courses = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='progress')
+    course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='progress')
     video_list = models.JSONField(default=list, blank=True)
     enroll_date = models.DateField(auto_now_add=True)
 
@@ -14,4 +14,4 @@ class Progres(models.Model):
             self.video_list.append(video_id)
 
     def __str__(self):
-        return f"{self.courses.title}-({len(self.video_list)} watched)"
+        return f"{self.course.title}-({len(self.video_list)} watched)"
