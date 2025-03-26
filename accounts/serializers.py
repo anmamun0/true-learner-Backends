@@ -4,6 +4,8 @@ from django.contrib.auth.models import User, Group
 from .constraint import ROLE_CHOICES
 from django.contrib.auth import authenticate
 
+from .models import Student,Instructor
+
 
 class RegistraionSerializer(serializers.ModelSerializer): 
     role = serializers.ChoiceField(choices=ROLE_CHOICES,required=True)
@@ -45,7 +47,11 @@ class UserLoginSerializers(serializers.Serializer):
         
         if  not user.groups.filter(name=role).exists():
             raise serializers.ValidationError(f"You are not a {role}")
-
+        if role == 'Student':
+            attrs['profile'] = Student.objects.get(user=user)  
+        elif role == 'Instructor':
+            attrs['profile'] = Instructor.objects.get(user=user)  
+        
         attrs['user'] = user
         return attrs
     

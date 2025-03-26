@@ -89,13 +89,15 @@ class LoginView(APIView):
         serializer = UserLoginSerializers(data=self.request.data)
         if serializer.is_valid():
             user = serializer._validated_data['user']
+            profile = serializer._validated_data['profile']
+
             if user:
                 token , _ = Token.objects.get_or_create(user=user)
                 login(request,user)
                  # Set the CSRF token in the response
                 csrf_token = get_token(request)
 
-                return Response({"token":token.key,"user_id":user.id,"csrfToken": csrf_token,})
+                return Response({"token":token.key,"user_id":user.id,"profile_id":profile.id,"csrfToken": csrf_token,})
             else:
                 return Response({"error":"Invalid Credential"})
         return Response(serializer.errors)
