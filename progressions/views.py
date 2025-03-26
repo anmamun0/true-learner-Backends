@@ -21,7 +21,7 @@ class ProgressViewSerializers(ModelViewSet):
     @action(detail=True,methods=['post'],url_path='update')
     def update_progress(self,request,pk=None):
         progres = Progres.objects.get(pk=pk)
-        video_id = request.data.get('video_id')
+        video_id = int(request.data.get('video_id'))
         progres.update_progres(video_id)
         progres.save()
         
