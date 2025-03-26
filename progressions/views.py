@@ -18,7 +18,7 @@ class ProgressViewSerializers(ModelViewSet):
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filterset_class = ProgressFilter
     
-    @action(detail=True,methods=['put'],url_path='update')
+    @action(detail=True,methods=['post'],url_path='update')
     def update_progress(self,request,pk=None):
         progres = Progres.objects.get(pk=pk)
         video_id = request.data.get('video_id')
